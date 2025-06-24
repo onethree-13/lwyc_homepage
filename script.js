@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, observerOptions);
     
     // 观察所有需要动画的元素
-    const animatedElements = document.querySelectorAll('.feature-card, .testimonial-card, .patent-card, .endorsement-card, .team-member, .stat-item, .concept-card, .process-step, .ai-step, .insight-card, .explanation-card, .flow-step');
+    const animatedElements = document.querySelectorAll('.feature-card, .testimonial-card, .concept-card, .process-step, .ai-step, .insight-card, .explanation-card, .flow-step');
     
     animatedElements.forEach(el => {
         el.style.opacity = '0';
@@ -89,25 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
         requestAnimationFrame(animation);
     }
     
-    // 当统计部分进入视窗时开始动画
-    const statsSection = document.querySelector('.company-stats');
-    if (statsSection) {
-        const statsObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const statNumbers = entry.target.querySelectorAll('.stat-number');
-                    statNumbers.forEach(stat => {
-                        const finalValue = parseInt(stat.textContent);
-                        stat.dataset.suffix = stat.textContent.replace(/\d+/g, '');
-                        animateCounter(stat, 0, finalValue, 2000);
-                    });
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        statsObserver.observe(statsSection);
-    }
+
     
     // 平滑滚动到锚点
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -125,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 鼠标跟随效果（可选）
     document.addEventListener('mousemove', function(e) {
-        const cards = document.querySelectorAll('.feature-card, .patent-card, .endorsement-card');
+        const cards = document.querySelectorAll('.feature-card');
         
         cards.forEach(card => {
             const rect = card.getBoundingClientRect();
